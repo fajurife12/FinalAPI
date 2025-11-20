@@ -2,10 +2,6 @@ trigger:
   branches:
     include:
     - main
-  paths:
-    include:
-    - src/**
-    - azure-pipelines.yml
 
 pr:
   branches:
@@ -19,7 +15,7 @@ variables:
   buildConfiguration: 'Release'
   dotnetVersion: '9.0.x'
   azureServiceConnection: 'AzureServiceConnection'
-  appServiceName: 'finalapi'
+  appServiceName: 'miproyectoapi'
   resourceGroupName: 'rg-finalapi-prod'
 
 stages:
@@ -46,7 +42,6 @@ stages:
       inputs:
         command: 'build'
         arguments: '--configuration $(buildConfiguration) --no-restore'
-        projects: '**/*.csproj'
 
     - task: DotNetCoreCLI@2
       displayName: 'Ejecutar pruebas unitarias'
@@ -72,12 +67,12 @@ stages:
         publishLocation: 'Container'
 
 - stage: Deploy
-  displayName: 'Despliegue a Azure'
+  displayName: 'Despliegue a Azure App Service'
   dependsOn: Build
   condition: succeeded()
   jobs:
   - deployment: DeployToAppService
-    displayName: 'Desplegar a App Service'
+    displayName: 'Desplegar a FinalAPI'
     environment: 'Production'
     strategy:
       runOnce:
