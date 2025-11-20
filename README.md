@@ -9,7 +9,7 @@ API REST desarrollada con .NET Core 9 con CI/CD en Azure DevOps.
 ## Ejecución Local
 ```bash
 dotnet build
-dotnet run --project ./src/MiProyectoAPI.Api
+dotnet run --project ./src/FinalAPI.Api
 ```
 
 ## Documentación API
